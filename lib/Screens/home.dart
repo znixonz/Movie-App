@@ -10,6 +10,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var movies;
+  var upcoming;
   Color mainColor = const Color(0xff3C3261);
 
   void getData() async {
@@ -20,9 +21,19 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void getupcoming() async {
+    var data = await getUpComing();
+
+    setState(() {
+      upcoming = data['results'];
+    });
+  }
+  
+
   @override
   Widget build(BuildContext context) {
     getData();
+    getupcoming();
 
     return new Scaffold(
       backgroundColor: Colors.white,
@@ -50,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.brown,
           child: new Padding(
             padding: const EdgeInsets.all(16.0),
             child: new Column(
@@ -93,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: new ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: movies == null ? 0 : movies.length,
+                      itemCount: upcoming == null ? 0 : movies.length,
                       itemBuilder: (context, i) {
                         return new Column(
                           children: <Widget>[
@@ -103,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: 240,
                               color: Colors.blue,
                               child: new FlatButton(
-                                child: new MovieCell(movies, i),
+                                child: new MovieCell(upcoming, i),
                                 padding: const EdgeInsets.all(0.0),
                                 onPressed: () {
                                   // Navigator.push(context,
@@ -160,10 +170,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Future<Map> getJson() async {
   var apiKey = '6a53377c0ee23811945a9e71a993601f';
-  var url = 'http://api.themoviedb.org/3/discover/movie?api_key=${apiKey}';
+  var url = 'https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=en-US&page=1';
   var response = await http.get(url);
   return json.decode(response.body);
 }
+
+Future<Map> getUpComing() async{
+  var apiKey = '6a53377c0ee23811945a9e71a993601f';
+  var url = 'https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey&language=en-US&page=1';
+  var response = await http.get(url);
+  return json.decode(response.body);
+}
+
 
 class MovieTitle extends StatelessWidget {
   final Color mainColor;
@@ -175,7 +193,7 @@ class MovieTitle extends StatelessWidget {
     return new Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       child: new Text(
-        'Top Rated',
+        'Popular',
         style: new TextStyle(
             fontSize: 20.0,
             color: mainColor,
@@ -190,8 +208,8 @@ class MovieTitle extends StatelessWidget {
 class MovieCell extends StatelessWidget {
   final movies;
   final i;
-  Color mainColor = const Color(0xff3C3261);
-  var image_url = 'https://image.tmdb.org/t/p/w500/';
+  final Color mainColor = const Color(0xff3C3261);
+  final imageUrl = 'https://image.tmdb.org/t/p/w500/';
   MovieCell(this.movies, this.i);
 
   @override
@@ -215,7 +233,7 @@ class MovieCell extends StatelessWidget {
                   color: Colors.grey,
                   image: new DecorationImage(
                       image: new NetworkImage(
-                          image_url + movies[i]['poster_path']),
+                          imageUrl + movies[i]['poster_path']),
                       fit: BoxFit.cover),
                   boxShadow: [
                     new BoxShadow(
