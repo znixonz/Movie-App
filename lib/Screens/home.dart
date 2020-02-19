@@ -48,41 +48,110 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: new Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new MovieTitle(mainColor),
-            new Expanded(
-              child: new ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: movies == null ? 0 : movies.length,
-                  itemBuilder: (context, i) {
-                    return new Column(
-                      children: <Widget>[
-                        new Container(
-                          //empty space between images
-                          width: 250,
-                          height: 300,
-                          child: new FlatButton(
-                            child: new MovieCell(movies, i),
-                            padding: const EdgeInsets.all(0.0),
-                            onPressed: () {
-                              // Navigator.push(context,
-                              //     new MaterialPageRoute(builder: (context) {
-                              //   return new MovieDetail(movies[i]);
-                              // }));
-                            },
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.brown,
+          child: new Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new MovieTitle(mainColor),
+                new Container(
+                  height: 250,
+                  child: new ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: movies == null ? 0 : movies.length,
+                      itemBuilder: (context, i) {
+                        return new Column(
+                          children: <Widget>[
+                            new Container(
+                              //empty space between images
+                              width: 250,
+                              height: 240,
+                              color: Colors.red,
+                              child: new FlatButton(
+                                child: new MovieCell(movies, i),
+                                padding: const EdgeInsets.all(0.0),
+                                onPressed: () {
+                                  // Navigator.push(context,
+                                  //     new MaterialPageRoute(builder: (context) {
+                                  //   return new MovieDetail(movies[i]);
+                                  // }));
+                                },
+                                //color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                ),
+                new MovieTitle(mainColor),
+                new Container(
+                  height: 250,
+                  child: new ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: movies == null ? 0 : movies.length,
+                      itemBuilder: (context, i) {
+                        return new Column(
+                          children: <Widget>[
+                            new Container(
+                              //empty space between images
+                              width: 250,
+                              height: 240,
+                              color: Colors.blue,
+                              child: new FlatButton(
+                                child: new MovieCell(movies, i),
+                                padding: const EdgeInsets.all(0.0),
+                                onPressed: () {
+                                  // Navigator.push(context,
+                                  //     new MaterialPageRoute(builder: (context) {
+                                  //   return new MovieDetail(movies[i]);
+                                  // }));
+                                },
+                                //color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                ),
+                new MovieTitle(mainColor),
+                new Container(
+                  height: 250,
+                  child: new ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: movies == null ? 0 : movies.length,
+                      itemBuilder: (context, i) {
+                        return new Column(
+                          children: <Widget>[
+                            new Container(
+                              //empty space between images
+                              width: 250,
+                              height: 240,
+                              color: Colors.greenAccent,
+                              child: new FlatButton(
+                                child: new MovieCell(movies, i),
+                                padding: const EdgeInsets.all(0.0),
+                                onPressed: () {
+                                  // Navigator.push(context,
+                                  //     new MaterialPageRoute(builder: (context) {
+                                  //   return new MovieDetail(movies[i]);
+                                  // }));
+                                },
+                                //color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -157,38 +226,41 @@ class MovieCell extends StatelessWidget {
                 ),
               ),
             ),
-            new Expanded(
-                child: new Container(
-              margin: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
-              child: new Column(
-                children: [
-                  // new Text(
-                  //   movies[i]['title'],
-                  //   style: new TextStyle(
-                  //       fontSize: 20.0,
-                  //       fontFamily: 'Arvo',
-                  //       fontWeight: FontWeight.bold,
-                  //       color: mainColor),
-                  // ),
-                  new Padding(padding: const EdgeInsets.all(2.0)),
-                  // new Text(
-                  //   movies[i]['overview'],
-                  //   maxLines: 1,
-                  //   style: new TextStyle(
-                  //       color: const Color(0xff8785A4), fontFamily: 'Arvo'),
-                  // )
-                ],
-                crossAxisAlignment: CrossAxisAlignment.start,
-              ),
-            )),
+            // new Expanded(
+            //     child: new Container(
+            //   color: Colors.blue,
+            //   margin: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+            //   child: new Column(
+            //     children: [
+            //       // new Text(
+            //       //   movies[i]['title'],
+            //       //   style: new TextStyle(
+            //       //       fontSize: 20.0,
+            //       //       fontFamily: 'Arvo',
+            //       //       fontWeight: FontWeight.bold,
+            //       //       color: mainColor),
+            //       // ),
+            //       new Padding(padding: const EdgeInsets.all(2.0)),
+            //       // new Text(
+            //       //   movies[i]['overview'],
+            //       //   maxLines: 1,
+            //       //   style: new TextStyle(
+            //       //       color: const Color(0xff8785A4), fontFamily: 'Arvo'),
+            //       // )
+            //     ],
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //   ),
+            // )),
           ],
         ),
-        new Container(
-          width: 100.0,
-          height: 0.5,
-          color: const Color(0xD2D2E1ff),
-          margin: const EdgeInsets.all(16.0),
-        )
+        // new Container(
+        //   width: 100.0,
+        //   height: 0.5,
+
+        //   //color: const Color(0xD2D2E1ff),
+        //   color: Colors.blue,
+        //   margin: const EdgeInsets.all(16.0),
+        // )
       ],
     );
   }
