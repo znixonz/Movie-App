@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:movie_app/widgets/drawer.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -51,10 +52,14 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         backgroundColor: Color(0xff242248),
        // backgroundColor: Colors.white,
-        leading: Icon(
-          Icons.menu,
-          color: Color(0xff8267db),
-        ),
+        leading: Builder(builder: (BuildContext context){
+          return IconButton(icon: Icon(Icons.menu),
+          onPressed: (){
+            Scaffold.of(context).openDrawer();
+
+          },
+          );
+        }),
         title: Text(
           'Movies',
           style: TextStyle(
